@@ -27,8 +27,10 @@ class App extends React.Component {
       return (
         <div id="container">
           {(this.state.accion=="Cliente")?<Cliente />: <Escribano />}
-          <button onClick={this.clickCliente}>Cliente</button>
-          <button onClick={this.clickEscribano}>Escribano</button>
+          <div id="buttons">
+            <button onClick={this.clickCliente}>Cliente</button>
+            <button onClick={this.clickEscribano}>Escribano</button>
+          </div>
         </div>    
       )
     }
