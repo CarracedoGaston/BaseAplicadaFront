@@ -1,26 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Cliente from './components/cliente'
+import Escribano from './components/escribano'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+class App extends React.Component { 
+  constructor(props) {
+    super(props)
+    this.state = {
+      accion: "loading"
+    }
+    this.clickCliente = this.clickCliente.bind(this)
+    this.clickEscribano = this.clickEscribano.bind(this)
+  }
+ 
+  clickCliente() {
+    this.setState({accion: 'Cliente'})
+  }
+  
+  clickEscribano() {
+    this.setState({accion: 'Escribano'})
+  }
+
+    render() {
+      return (
+        <div id="container">
+          {(this.state.accion=="Cliente")?<Cliente />: <Escribano />}
+          <button onClick={this.clickCliente}>Cliente</button>
+          <button onClick={this.clickEscribano}>Escribano</button>
+        </div>    
+      )
+    }
+  }
 
 export default App;
+
+
