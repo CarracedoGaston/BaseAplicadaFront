@@ -1,20 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Cliente from './components/cliente'
-import Escribano from './components/escribano'
+import Table from './components/table'
 
 
 class App extends React.Component { 
   constructor(props) {
     super(props)
     this.state = {
-      accion: "loading"
+      accion: ''
     }
+
     this.clickCliente = this.clickCliente.bind(this)
     this.clickEscribano = this.clickEscribano.bind(this)
+    this.clickTable = this.clickTable.bind(this)
   }
- 
+
   clickCliente() {
     this.setState({accion: 'Cliente'})
   }
@@ -23,18 +23,33 @@ class App extends React.Component {
     this.setState({accion: 'Escribano'})
   }
 
-    render() {
-      return (
-        <div id="container">
-          {(this.state.accion=="Cliente")?<Cliente />: <Escribano />}
-          <div id="buttons">
-            <button onClick={this.clickCliente}>Cliente</button>
-            <button onClick={this.clickEscribano}>Escribano</button>
-          </div>
-        </div>    
-      )
+  clickTable() {
+    this.setState({accion: 'Table'})
+  }
+
+  renderSwitch (params) {
+    switch(params){
+      case 'Cliente':
+        return 'http://localhost:5000/cliente'
+      case 'Escribano':
+        return 'http://localhost:5000/escribano'
+      default:
+        break
     }
   }
+
+  render() {
+    return (
+      <div id="container">
+        {this.state.accion===''?<div className="loading">Loading...</div>:<Table url= {this.renderSwitch(this.state.accion)}/>}       
+        <div id="buttons">
+          <button onClick={this.clickCliente}>Cliente</button>
+          <button onClick={this.clickEscribano}>Escribano</button>
+        </div>
+      </div>    
+    )
+  }
+}
 
 export default App;
 

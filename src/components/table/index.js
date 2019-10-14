@@ -1,16 +1,25 @@
 import React from 'react';
 
 
-class Cliente extends React.Component {
+class Table extends React.Component {
   state = {
     person: []
   }
 
   async componentDidMount() { 
-    const url = 'http://localhost:5000/cliente'
+    const url = `${this.props.url}`
     const response = await fetch(url)
     const data = await response.json()
     this.setState({person: data})
+  }
+
+  async componentDidUpdate(prevProps) { 
+    if (this.props.url !== prevProps.url){
+      const url = `${this.props.url}`
+      const response = await fetch(url)
+      const data = await response.json()
+      this.setState({person: data})
+    }
   }
 
   render () {
@@ -37,4 +46,4 @@ class Cliente extends React.Component {
   }
 }
 
-export default Cliente
+export default Table
