@@ -12,7 +12,6 @@ class App extends React.Component {
 
     this.clickCliente = this.clickCliente.bind(this)
     this.clickEscribano = this.clickEscribano.bind(this)
-    this.clickTable = this.clickTable.bind(this)
   }
 
   clickCliente() {
@@ -21,10 +20,6 @@ class App extends React.Component {
   
   clickEscribano() {
     this.setState({accion: 'Escribano'})
-  }
-
-  clickTable() {
-    this.setState({accion: 'Table'})
   }
 
   renderSwitch (params) {
@@ -41,7 +36,7 @@ class App extends React.Component {
   render() {
     return (
       <div id="container">
-        {this.state.accion===''?<div className="loading">Loading...</div>:<Table url= {this.renderSwitch(this.state.accion)}/>}       
+        {this.state.accion===''?<div className="loading">Loading...</div>:<Table url = {this.renderSwitch(this.state.accion)} />}       
         <div id="buttons">
           <button onClick={this.clickCliente}>Cliente</button>
           <button onClick={this.clickEscribano}>Escribano</button>
