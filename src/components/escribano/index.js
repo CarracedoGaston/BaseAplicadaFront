@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from 'react'
+import Select from 'react-select'
 
 class Escribano extends React.Component {
   state = {
@@ -14,24 +14,33 @@ class Escribano extends React.Component {
   }
   
   render () {
+    const techCompanies = [
+      { label: "All", value: 1 },
+      { label: "ById", value: 2 }
+    ]
     return ( 
-      <div id="table">
-        <div id="name">
-          <div className="title">Name</div>
-          {this.state.person.map(person => (
-            <div key = {person._id} className="nameRow">
-            {`${person.name}`}
-            </div>
-          ))}
+      <div className="main">
+        <div id="table">
+          <div id="name">
+            <div className="title">Name</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="nameRow">
+              {`${person.name}`}
+              </div>
+            ))}
+          </div>
+          <div id="lastName">
+            <div className="title">Last Name</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="lastNameRow">
+              {`${person.lastName}`}
+              </div>
+            ))}
+          </div>
         </div>
-        <div id="lastName">
-          <div className="title">Last Name</div>
-          {this.state.person.map(person => (
-            <div key = {person._id} className="lastNameRow">
-            {`${person.lastName}`}
-            </div>
-          ))}
-        </div>
+        <div id="combo">
+          <Select options={ techCompanies } />
+          </div>
       </div>
     )
   }

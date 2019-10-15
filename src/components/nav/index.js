@@ -19,7 +19,6 @@ function Nav () {
           <li>Escrituras</li>
         </Link>
       </ul>
-      <hr></hr>
     </nav>
   )
 }

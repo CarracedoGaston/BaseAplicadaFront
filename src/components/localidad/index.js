@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Select from 'react-select'
 
 class Localidad extends React.Component {
   state = {
@@ -14,6 +14,10 @@ class Localidad extends React.Component {
   }
 
   render () {
+    const techCompanies = [
+      { label: "All", value: 1 },
+      { label: "ById", value: 2 }
+    ]
     return ( 
       <div className="main">
         <div id="table">
@@ -34,8 +38,10 @@ class Localidad extends React.Component {
             ))}
           </div>
         </div>
-      </div>
-      
+        <div id="combo">
+        <Select options={ techCompanies } />
+        </div>
+      </div> 
     )
   }
 }

@@ -36,25 +36,31 @@
   color: black;
 }
 
-nav {
-  position: fixed;
-  top: 10vh;
-  left: 0;
-  height: 30%;
-  width: 100%;
+#combo {
+  margin-left: 5vw;
+  width: 40vw;
 }
+
+nav {
+  height: 20%;
+  width: 100%;
+  padding-top: 5%;
+}
+
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
-   width: 100%;
-   height: 70%;
+  width: 100%;
+  height: 80%;
 }
 
 ul {
   display: flex;
   justify-content: space-around;
   list-style: none;
+  padding-bottom: 3vh;
+  border-bottom: 2px solid white;
 }
 
 .link {
