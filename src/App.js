@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
-import Table from './components/table'
+import Cliente from './components/cliente'
+import Escribano from './components/escribano'
+import Localidad from './components/localidad'
+import Nav from './components/nav'
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 
 class App extends React.Component { 
@@ -9,39 +13,21 @@ class App extends React.Component {
     this.state = {
       accion: ''
     }
-
-    this.clickCliente = this.clickCliente.bind(this)
-    this.clickEscribano = this.clickEscribano.bind(this)
-  }
-
-  clickCliente() {
-    this.setState({accion: 'Cliente'})
-  }
-  
-  clickEscribano() {
-    this.setState({accion: 'Escribano'})
-  }
-
-  renderSwitch (params) {
-    switch(params){
-      case 'Cliente':
-        return 'http://localhost:5000/cliente'
-      case 'Escribano':
-        return 'http://localhost:5000/escribano'
-      default:
-        break
-    }
   }
 
   render() {
     return (
-      <div id="container">
-        {this.state.accion===''?<div className="loading">Loading...</div>:<Table url = {this.renderSwitch(this.state.accion)} />}       
-        <div id="buttons">
-          <button onClick={this.clickCliente}>Cliente</button>
-          <button onClick={this.clickEscribano}>Escribano</button>
-        </div>
-      </div>    
+      <Router>
+        <div id="container">
+          <Nav />
+          <Switch>
+            <Route path="/cliente" component={Cliente}/>
+            <Route path="/escribano" component={Escribano}/>
+            <Route path="/localidad" component={Localidad}/>
+          </Switch>  
+        </div>   
+      </Router>
+       
     )
   }
 }
