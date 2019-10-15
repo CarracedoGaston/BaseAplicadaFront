@@ -14,7 +14,7 @@ class Cliente extends React.Component {
   }
 
   render () {
-    const techCompanies = [
+    const clientes = [
       { label: "All", value: 1 },
       { label: "ById", value: 2 }
     ]
@@ -39,7 +39,7 @@ class Cliente extends React.Component {
           </div>
         </div>
         <div id="combo">
-        <Select options={ techCompanies } />
+        <Select options={ clientes } />
         </div>
       </div>
       

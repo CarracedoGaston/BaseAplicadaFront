@@ -1,23 +1,28 @@
 import React from 'react';
-import Select from 'react-select'
 
 class Localidad extends React.Component {
-  state = {
-    person: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      person: [],
+      url: 'http://localhost:5000/localidad'
+    }
+    this.idClick = this.idClick.bind(this)
   }
-
+ 
   async componentDidMount() { 
-    const url = 'http://localhost:5000/localidad'
+    const url = `${this.state.url}`
     const response = await fetch(url)
     const data = await response.json()
     this.setState({person: data})
   }
 
+  idClick () {
+    this.setState({url: 'http://localhost:5000/localidad/5d9ce78aa85fc607901d7996'})
+  }
+
+
   render () {
-    const techCompanies = [
-      { label: "All", value: 1 },
-      { label: "ById", value: 2 }
-    ]
     return ( 
       <div className="main">
         <div id="table">
@@ -39,7 +44,10 @@ class Localidad extends React.Component {
           </div>
         </div>
         <div id="combo">
-        <Select options={ techCompanies } />
+          <ul id="listConsults">
+            <li className="listItems">GetAll</li>
+            <li className="listItems" onClick={this.idClick}>ById(9400)</li>
+          </ul>
         </div>
       </div> 
     )

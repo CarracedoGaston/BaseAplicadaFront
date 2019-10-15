@@ -37,7 +37,6 @@
 }
 
 #combo {
-  margin-left: 5vw;
   width: 40vw;
 }
 
@@ -71,4 +70,18 @@ ul {
 
 hr {
   color: white;
+}
+
+#listConsults {
+  display: flex;
+  height: 100%;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  border-bottom: 0;
+}
+
+.listItems {
+  margin-top: 2vh;
 }
