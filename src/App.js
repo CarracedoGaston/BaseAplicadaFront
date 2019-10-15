@@ -20,18 +20,17 @@ class App extends React.Component {
           <Nav />
           <Switch>
             <Route path="/cliente" 
-            render={(routerProps) => (<Table {...routerProps} url = {'http://localhost:5000/cliente'}/>)}
+            render={(routerProps) => (<Table {...routerProps} url = 'cliente'/>)}
             />
             <Route path="/escribano" 
-            render={(routerProps) => (<Table {...routerProps} url = {'http://localhost:5000/escribano'}/>)}
+            render={(routerProps) => (<Table {...routerProps} url = 'escribano'/>)}
             />
             <Route path="/localidad" 
-            render={(routerProps) => (<Table {...routerProps} url = {'http://localhost:5000/localidad'}/>)}
+            render={(routerProps) => (<Table {...routerProps} url = 'localidad'/>)}
             />
           </Switch>  
         </div>   
-      </Router>
-       
+      </Router>     
     )
   }
 }
