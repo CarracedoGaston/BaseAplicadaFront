@@ -17,18 +17,24 @@ class App extends React.Component {
     return (
       <Router>
         <div id="container">
-          <Nav />
-          <Switch>
-            <Route path="/cliente" 
-            render={(routerProps) => (<Table {...routerProps} url = 'cliente'/>)}
-            />
-            <Route path="/escribano" 
-            render={(routerProps) => (<Table {...routerProps} url = 'escribano'/>)}
-            />
-            <Route path="/localidad" 
-            render={(routerProps) => (<Table {...routerProps} url = 'localidad'/>)}
-            />
-          </Switch>  
+          <header><span>Base de Datos Aplicada I</span></header>
+          <nav>
+            <Nav />
+          </nav>
+          <main>
+            <Switch>
+              <Route path="/cliente" 
+              render={(routerProps) => (<Table {...routerProps} url = 'cliente'/>)}
+              />
+              <Route path="/escribano" 
+              render={(routerProps) => (<Table {...routerProps} url = 'escribano'/>)}
+              />
+              <Route path="/localidad" 
+              render={(routerProps) => (<Table {...routerProps} url = 'localidad'/>)}
+              />
+            </Switch> 
+          </main>
+          <footer><span>Carracedo Gaston</span></footer> 
         </div>   
       </Router>     
     )
