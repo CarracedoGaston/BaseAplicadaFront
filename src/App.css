@@ -5,31 +5,33 @@
   height: 100vh;
   align-items: center;
   justify-content: space-around;
-  /* background-color: black; */
 }
 
 header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 10%;
   width: 100%;
-  background-color: red;
+  background-color: rgb(160, 23, 41);
+  color: white;
+  font-size: 150%;
+  font-family: monospace;
 }
 
 nav {
-  height: 20%;
+  height: 10%;
   width: 100%;
-  background-color: green;
+  background-color: black;
 }
 
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  height: 70%;
   width: 100%;
-  background-color: brown;
+  background-color: rgb(17, 16, 16);
 }
 
 footer {
@@ -38,76 +40,17 @@ footer {
   align-items: center;
   height: 10%;
   width: 100%;
-  background-color: blue;
+  background-color: rgb(160, 23, 41);
+  color: white;
+  font-size: 150%;
+  font-family: monospace;
 }
 
 #table {
-  height: 80%;
+  height: 60%;
   width: 80%;
 }
 
 ul {
   height: 80%;
 }
-/*
-
-.loading{
-  color: white;
-  font-size: 200%;
-}
-.title {
-  background-color: rgba(234, 0, 255, 0.815);
-  font-weight: bold;
-  font-style: oblique;
-  color: black;
-}
-
-#combo {
-  width: 40vw;
-}
-
-nav {
-  height: 20%;
-  width: 100%;
-  padding-top: 5%;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 80%;
-}
-
-ul {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding-bottom: 3vh;
-  border-bottom: 2px solid white;
-}
-
-.link {
-  color: white;
-  text-decoration: none;
-  font-size: 125%;
-}
-
-hr {
-  color: white;
-}
-
-#listConsults {
-  display: flex;
-  height: 100%;
-  width: 80%;
-  flex-direction: column;
-  align-items: center;
-  color: white;
-  border-bottom: 0;
-}
-
-.listItems {
-  margin-top: 2vh;
-} */

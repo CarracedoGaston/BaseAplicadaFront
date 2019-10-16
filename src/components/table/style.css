@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   text-align: center;
+  color: white;
 }
 
 #cp, #lastName, #name {
@@ -9,10 +10,11 @@
 }
 
 .lastNameRow, .codigoRow, .nameRow {
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .title {
-  font-size: 130%;
+  font-size: 150%;
   margin-bottom: 5%;
+  font-family: 'Franklin Gothic Medium';
 }
