@@ -34,7 +34,7 @@ class App extends React.Component {
               />
             </Switch> 
           </main>
-          <footer><span>Carracedo Gaston</span></footer> 
+          <footer><span>Azzaretti && Carracedo</span></footer> 
         </div>   
       </Router>     
     )
