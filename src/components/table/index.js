@@ -9,9 +9,10 @@ class Table extends React.Component {
       url: 'http://localhost:5000/api/',
       cliente: [],
       escribano : [],
-      color: null
+      color: null,
+      biggestEscribano: 0
     } 
-    this.changecolor = this.changecolor.bind(this)
+    this.BiggestEscribano = this.BiggestEscribano.bind(this)
   }
   
 
@@ -24,8 +25,8 @@ class Table extends React.Component {
     const dataClie = await responseClie.json()
     this.setState({cliente: dataClie})
     const responseEsc = await fetch(`${this.state.url}escribano`)
-      const dataEsc = await responseEsc.json()
-      this.setState({escribano: dataEsc})
+    const dataEsc = await responseEsc.json()
+    this.setState({escribano: dataEsc})
   }
 
   async componentDidUpdate(prevProps) { 
@@ -111,7 +112,7 @@ class Table extends React.Component {
               </div>
             ))} */}
               {this.state.person.map(person => 
-                person.escribano==='5d9d2511037130456cee65c7'?(
+                person.escribano===this.state.biggestEscribano?(
                 <div key = {person._id} className="escribanoRow" style={{backgroundColor:'green'}}>
                   {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
                 </div>
@@ -136,11 +137,32 @@ class Table extends React.Component {
     }
   }
 
-  changecolor() {
-    if(this.state.color === 'blue'){
-      this.setState({color: 'black'})
-    }else{
-      this.setState({color: 'blue'})
+  BiggestEscribano() {
+    let array = this.state.person.map(person => (this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)))
+    let ObjectBiggest = {
+      lastname: '',
+      count: 0
+    }
+    let count = 0
+    for (let j = 0; j < array.length; j++){
+      for(let i = 0; i < array.length; i++){
+        if (array[i][0] === array[j][0]){
+          count ++
+        }
+      }
+      if(count > ObjectBiggest.count) {
+        ObjectBiggest.count = count
+        ObjectBiggest.lastname = array[j][0]
+      }
+      count = 0
+    }
+    this.state.escribano.forEach(element => {
+      if(element.lastName === ObjectBiggest.lastname){
+        return this.setState({biggestEscribano: element._id})
+      }
+    })
+    if(this.state.biggestEscribano !== 0){
+      this.setState({biggestEscribano: 0})
     }
   }
 
@@ -153,7 +175,7 @@ class Table extends React.Component {
           {/* {this.state.color? this.jsxTableColor(): this.jsxTable() } */}
         </div>
         <div>
-          <button onClick={this.changecolor}>Escribanos con mas de 3 escrituras</button>
+          <button onClick={this.BiggestEscribano}>Escribano con mas escrituras</button>
         </div>
       </>
     )
