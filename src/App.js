@@ -23,6 +23,9 @@ function App () {
             <Route path="/localidad" 
             render={(routerProps) => (<Table {...routerProps} url = 'localidad'/>)}
             />
+            <Route path="/escritura" 
+            render={(routerProps) => (<Table {...routerProps} url = 'escritura'/>)}
+            />
           </Switch> 
         </main>
         <footer><span>Azzaretti && Carracedo</span></footer> 

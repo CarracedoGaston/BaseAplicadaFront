@@ -4,7 +4,9 @@ import './style.css'
 class Table extends React.Component {
   state = {
     person: [],
-    url: 'http://localhost:5000/'
+    url: 'http://localhost:5000/',
+    cliente: [],
+    escribano : []
   }
 
   async componentDidMount() { 
@@ -12,6 +14,14 @@ class Table extends React.Component {
     const response = await fetch(url)
     const data = await response.json()
     this.setState({person: data})
+    if(`${this.props.url}`==='escritura'){
+      const response = await fetch(`${this.state.url}cliente`)
+      const data = await response.json()
+      this.setState({cliente: data})
+      const responseEsc = await fetch(`${this.state.url}escribano`)
+      const dataEsc = await responseEsc.json()
+      this.setState({escribano: dataEsc})
+    }
   }
 
   async componentDidUpdate(prevProps) { 
@@ -61,12 +71,62 @@ class Table extends React.Component {
       </div>
     )
   }
+  escrituraTipo () {
+    return (
+      <div id="escritura">
+        <div id="tipo">
+          <div className="title">Tipo</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="tipoRow">
+                {`${person.tipo}`}
+              </div>
+          ))}
+        </div> 
+        <div id="desc">
+          <div className="title">Descripcion</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="descRow">
+                {`${person.descripcion}`}
+              </div>
+            ))}
+        </div>   
+        <div id="cliente">
+          <div className="title">Cliente</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="clienteRow">
+                {this.state.cliente.filter(element => element._id === person.cliente).map(element => element.lastName)}
+              </div>
+            ))}
+        </div>   
+        <div id="escribano">
+          <div className="title">Escribano</div>
+            {this.state.person.map(person => (
+              <div key = {person._id} className="escribanoRow">
+                {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
+              </div>
+            ))}
+        </div>   
+      </div>
+    )
+  }
+
+  jsxTable () {
+    switch(this.props.url){
+      case ('localidad'):
+        return this.cpColumn()
+      case('escritura'):
+        return this.escrituraTipo()
+      default:
+        return this.lastNameColumn()
+    }
+  }
 
   render () {
     return ( 
       <div id="table">
-        {this.nameColumn()}
-        {this.props.url==='localidad'?this.cpColumn():this.lastNameColumn()}
+        {this.props.url!=='escritura'?this.nameColumn():null}
+        {this.jsxTable()}
+        {}
       </div>
     )
   }

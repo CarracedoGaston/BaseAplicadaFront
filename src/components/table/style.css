@@ -1,15 +1,15 @@
-#table {
+#table, #escritura {
   display: flex;
   flex-direction: row;
   text-align: center;
   color: white;
 }
 
-#cp, #lastName, #name {
+#cp, #lastName, #name{
   width: 50%;
 }
 
-.lastNameRow, .codigoRow, .nameRow {
+.lastNameRow, .codigoRow, .nameRow, .tipoRow, .descRow, .clienteRow, .escribanoRow {
   border: 1px solid white;
 }
 
@@ -17,4 +17,11 @@
   font-size: 150%;
   margin-bottom: 5%;
   font-family: 'Franklin Gothic Medium';
+}
+
+#escritura {
+  width: 100%;
+}
+#desc, #tipo, #cliente, #escribano {
+  width: 25%;
 }
