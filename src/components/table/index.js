@@ -4,7 +4,7 @@ import './style.css'
 class Table extends React.Component {
   state = {
     person: [],
-    url: 'http://localhost:5000/',
+    url: 'http://localhost:5000/api/',
     cliente: [],
     escribano : []
   }
@@ -52,7 +52,7 @@ class Table extends React.Component {
         <div className="title">Last Name</div>
           {this.state.person.map(person => (
             <div key = {person._id} className="lastNameRow">
-              {`${person.lastName}`}
+              {person.lastName}
             </div>
           ))}
       </div>
