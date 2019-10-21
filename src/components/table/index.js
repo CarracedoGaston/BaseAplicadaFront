@@ -2,26 +2,30 @@ import React from 'react'
 import './style.css'
 
 class Table extends React.Component {
-  state = {
-    person: [],
-    url: 'http://localhost:5000/api/',
-    cliente: [],
-    escribano : []
+  constructor(props){
+    super(props)
+    this.state = {
+      person: [],
+      url: 'http://localhost:5000/api/',
+      cliente: [],
+      escribano : [],
+      color: null
+    } 
+    this.changecolor = this.changecolor.bind(this)
   }
+  
 
   async componentDidMount() { 
     const url = `${this.state.url}${this.props.url}`
     const response = await fetch(url)
     const data = await response.json()
     this.setState({person: data})
-    if(`${this.props.url}`==='escritura'){
-      const response = await fetch(`${this.state.url}cliente`)
-      const data = await response.json()
-      this.setState({cliente: data})
-      const responseEsc = await fetch(`${this.state.url}escribano`)
+    const responseClie = await fetch(`${this.state.url}cliente`)
+    const dataClie = await responseClie.json()
+    this.setState({cliente: dataClie})
+    const responseEsc = await fetch(`${this.state.url}escribano`)
       const dataEsc = await responseEsc.json()
       this.setState({escribano: dataEsc})
-    }
   }
 
   async componentDidUpdate(prevProps) { 
@@ -71,6 +75,7 @@ class Table extends React.Component {
       </div>
     )
   }
+
   escrituraTipo () {
     return (
       <div id="escritura">
@@ -100,11 +105,21 @@ class Table extends React.Component {
         </div>   
         <div id="escribano">
           <div className="title">Escribano</div>
-            {this.state.person.map(person => (
-              <div key = {person._id} className="escribanoRow">
+            {/* {this.state.person.map(person => (
+              <div key = {person._id} className="escribanoRow" style={{backgroundColor:this.state.color}}>
                 {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
               </div>
-            ))}
+            ))} */}
+              {this.state.person.map(person => 
+                person.escribano==='5d9d2511037130456cee65c7'?(
+                <div key = {person._id} className="escribanoRow" style={{backgroundColor:'green'}}>
+                  {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
+                </div>
+                ):
+                (<div key = {person._id} className="escribanoRow" style={{backgroundColor:''}}>
+                  {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
+                </div>)
+              )}
         </div>   
       </div>
     )
@@ -121,13 +136,26 @@ class Table extends React.Component {
     }
   }
 
+  changecolor() {
+    if(this.state.color === 'blue'){
+      this.setState({color: 'black'})
+    }else{
+      this.setState({color: 'blue'})
+    }
+  }
+
   render () {
     return ( 
-      <div id="table">
-        {this.props.url!=='escritura'?this.nameColumn():null}
-        {this.jsxTable()}
-        {}
-      </div>
+      <>
+        <div id="table">
+          {this.props.url!=='escritura'?this.nameColumn():null}
+          {this.jsxTable()}
+          {/* {this.state.color? this.jsxTableColor(): this.jsxTable() } */}
+        </div>
+        <div>
+          <button onClick={this.changecolor}>Escribanos con mas de 3 escrituras</button>
+        </div>
+      </>
     )
   }
 }

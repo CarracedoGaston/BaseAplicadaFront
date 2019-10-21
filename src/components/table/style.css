@@ -22,6 +22,11 @@
 #escritura {
   width: 100%;
 }
+
 #desc, #tipo, #cliente, #escribano {
   width: 25%;
+}
+
+.objetive {
+  margin-left: 10vw;
 }
