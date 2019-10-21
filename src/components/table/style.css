@@ -1,7 +1,7 @@
 #table, #escritura {
   display: flex;
-  flex-direction: row;
   text-align: center;
+  justify-content: center;
   color: white;
 }
 
@@ -29,4 +29,9 @@
 
 .objetive {
   margin-left: 10vw;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
 }

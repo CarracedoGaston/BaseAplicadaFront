@@ -10,9 +10,11 @@ class Table extends React.Component {
       cliente: [],
       escribano : [],
       color: null,
-      biggestEscribano: 0
+      biggestEscribano: 0,
+      clientSold: []
     } 
     this.BiggestEscribano = this.BiggestEscribano.bind(this)
+    this.ClientHowSold = this.ClientHowSold.bind(this)
   }
   
 
@@ -96,21 +98,28 @@ class Table extends React.Component {
               </div>
             ))}
         </div>   
-        <div id="cliente">
+        {/* <div id="cliente">
           <div className="title">Cliente</div>
             {this.state.person.map(person => (
               <div key = {person._id} className="clienteRow">
                 {this.state.cliente.filter(element => element._id === person.cliente).map(element => element.lastName)}
               </div>
             ))}
+        </div>  */}
+        <div id="cliente">
+          <div className="title">Cliente</div>
+            {
+              this.state.person.map( person => (this.state.clientSold.indexOf(person.cliente) >= 0)?
+                (<div key = {person._id} className="clienteRow"  style={{backgroundColor:'green'}}>
+                  {this.state.cliente.filter(client => client._id === person.cliente).map(client => client.lastName)}
+                </div>):
+                (<div key = {person._id} className="clienteRow"  style={{backgroundColor:''}}>
+                  {this.state.cliente.filter(client => client._id === person.cliente).map(client => client.lastName)}
+                </div>))
+            }
         </div>   
         <div id="escribano">
           <div className="title">Escribano</div>
-            {/* {this.state.person.map(person => (
-              <div key = {person._id} className="escribanoRow" style={{backgroundColor:this.state.color}}>
-                {this.state.escribano.filter(element => element._id === person.escribano).map(element => element.lastName)}
-              </div>
-            ))} */}
               {this.state.person.map(person => 
                 person.escribano===this.state.biggestEscribano?(
                 <div key = {person._id} className="escribanoRow" style={{backgroundColor:'green'}}>
@@ -166,16 +175,26 @@ class Table extends React.Component {
     }
   }
 
+  ClientHowSold() {
+    let arrayCliente = []
+    for (let j = 0; j < this.state.person.length; j++){
+      if(this.state.person[j].tipo === 'Venta'){
+        arrayCliente.push(this.state.person[j].cliente)
+      }
+    }
+    this.setState({clientSold: arrayCliente})
+  }
+
   render () {
     return ( 
       <>
         <div id="table">
           {this.props.url!=='escritura'?this.nameColumn():null}
           {this.jsxTable()}
-          {/* {this.state.color? this.jsxTableColor(): this.jsxTable() } */}
         </div>
-        <div>
+        <div className="buttons">
           <button onClick={this.BiggestEscribano}>Escribano con mas escrituras</button>
+          <button onClick={this.ClientHowSold}>Clientes que vendieron</button>
         </div>
       </>
     )

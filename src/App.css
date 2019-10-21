@@ -48,7 +48,12 @@ footer {
 }
 
 #table {
-  height: 60%;
+  height: 70%;
+  width: 80%;
+}
+
+.buttons {
+  height: 10%;
   width: 80%;
 }
 
