@@ -11,6 +11,7 @@ class Table extends React.Component {
       escribano : [],
       color: null,
       biggestEscribano: 0,
+      estadoCliente: false,
       clientSold: []
     } 
     this.BiggestEscribano = this.BiggestEscribano.bind(this)
@@ -98,14 +99,6 @@ class Table extends React.Component {
               </div>
             ))}
         </div>   
-        {/* <div id="cliente">
-          <div className="title">Cliente</div>
-            {this.state.person.map(person => (
-              <div key = {person._id} className="clienteRow">
-                {this.state.cliente.filter(element => element._id === person.cliente).map(element => element.lastName)}
-              </div>
-            ))}
-        </div>  */}
         <div id="cliente">
           <div className="title">Cliente</div>
             {
@@ -176,13 +169,21 @@ class Table extends React.Component {
   }
 
   ClientHowSold() {
-    let arrayCliente = []
-    for (let j = 0; j < this.state.person.length; j++){
-      if(this.state.person[j].tipo === 'Venta'){
-        arrayCliente.push(this.state.person[j].cliente)
+    if(this.state.estadoCliente === false){
+      let arrayCliente = []
+      console.log(this.state.clientSold)
+      for (let j = 0; j < this.state.person.length; j++){
+        if(this.state.person[j].tipo === 'Venta'){
+          arrayCliente.push(this.state.person[j].cliente)
+        }
       }
+      this.setState({clientSold: arrayCliente})
+      this.setState({estadoCliente: true})
     }
-    this.setState({clientSold: arrayCliente})
+    else {
+      this.setState({clientSold: []})
+      this.setState({estadoCliente: false})
+    }
   }
 
   render () {
