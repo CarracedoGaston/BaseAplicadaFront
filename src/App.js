@@ -14,6 +14,7 @@ function App () {
         </nav>
         <main>
           <Switch>
+            <Route exact path="/" render = {props => <div className="TitleInit"><h1 style={{color: 'white', fontFamily: 'monospace'}}>Esperando consulta...</h1></div>} />
             <Route path="/cliente" 
             render={(routerProps) => (<Table {...routerProps} url = 'cliente'/>)}
             />

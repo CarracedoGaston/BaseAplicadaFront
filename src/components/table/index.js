@@ -9,6 +9,7 @@ class Table extends React.Component {
       url: 'http://localhost:5000/api/',
       cliente: [],
       escribano : [],
+      urlProps: this.props.url,
       color: null,
       biggestEscribano: 0,
       estadoCliente: false,
@@ -193,10 +194,11 @@ class Table extends React.Component {
           {this.props.url!=='escritura'?this.nameColumn():null}
           {this.jsxTable()}
         </div>
+        {this.props.url==='escritura'?(
         <div className="buttons">
-          <button onClick={this.BiggestEscribano}>Escribano con mas escrituras</button>
-          <button onClick={this.ClientHowSold}>Clientes que vendieron</button>
-        </div>
+          <button  onClick={this.BiggestEscribano}>Escribano con mas escrituras</button>
+          <button  onClick={this.ClientHowSold}>Clientes que vendieron</button>
+        </div>):null}
       </>
     )
   }
