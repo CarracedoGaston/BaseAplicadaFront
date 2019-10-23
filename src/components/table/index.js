@@ -6,7 +6,8 @@ class Table extends React.Component {
     super(props)
     this.state = {
       person: [],
-      url: 'http://localhost:5000/api/',
+      // url: `http://localhost:${process.env.PORT||5000}/api/`,
+      url: '/api/',
       cliente: [],
       escribano : [],
       urlProps: this.props.url,

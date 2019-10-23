@@ -12,16 +12,21 @@ class Login extends React.Component {
   }
 
   login() {
-    this.setState({validation: true})
+    const name = document.getElementById('nameLogin').value
+    const password = document.getElementById('passwordLogin').value
+    if(name==='mauri' && password === '1234'){
+      this.setState({validation: true})
+    }  
   }
+  
   render() {
     return (
       <>
         {this.state.validation===false?
         <div id="loginContainer">
           <div id="form">
-            <input placeholder="Your name.."></input>
-            <input placeholder="Your password.."></input>
+            <input id="nameLogin" placeholder="Your name.."></input>
+            <input id="passwordLogin" placeholder="Your password.."></input>
             <button className="buttonLogin" onClick={this.login}>Login</button>
           </div>     
         </div>:
