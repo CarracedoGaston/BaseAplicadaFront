@@ -6,7 +6,7 @@ class Login extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      validation: false
+      validation: true
     }
     this.login = this.login.bind(this)
   }

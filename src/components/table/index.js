@@ -14,10 +14,13 @@ class Table extends React.Component {
       color: null,
       biggestEscribano: 0,
       estadoCliente: false,
-      clientSold: []
+      clientSold: [],
+      localidad: [],
+      cpBiggest: ""
     } 
     this.BiggestEscribano = this.BiggestEscribano.bind(this)
     this.ClientHowSold = this.ClientHowSold.bind(this)
+    this.BiggestCp = this.BiggestCp.bind(this)
   }
   
 
@@ -32,6 +35,9 @@ class Table extends React.Component {
     const responseEsc = await fetch(`${this.state.url}escribano`)
     const dataEsc = await responseEsc.json()
     this.setState({escribano: dataEsc})
+    const responseLoc = await fetch(`${this.state.url}localidad`)
+    const dataLoc = await responseLoc.json()
+    this.setState({localidad: dataLoc})
   }
 
   async componentDidUpdate(prevProps) { 
@@ -113,6 +119,23 @@ class Table extends React.Component {
                 </div>))
             }
         </div>   
+        <div id="cpCliente">
+          <div className="title">CP</div>
+            {
+              this.state.person.map( person => ((this.state.escribano.filter(element => element._id === person.escribano).map(element => element.localidad)) === this.state.BiggestCp)?
+                (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:'green'}}>
+                   { this.state.localidad
+                    .filter(cp => cp._id === this.state.cliente.filter(client => client._id === person.cliente).map(client => client.localidad)[0])
+                    .map(cp => cp.name)}                                
+                </div>) :
+                (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:'blue'}}>
+                  { this.state.localidad
+                   .filter(cp => cp._id === this.state.cliente.filter(client => client._id === person.cliente).map(client => client.localidad)[0])
+                   .map(cp => cp.name)}                                
+               </div>)
+                )
+            }
+        </div>   
         <div id="escribano">
           <div className="title">Escribano</div>
               {this.state.person.map(person => 
@@ -170,10 +193,32 @@ class Table extends React.Component {
     }
   }
 
+  BiggestCp() {
+    let biggestCount = {
+      count: 0,
+      id: ""
+    }
+    let array = this.state.person.map(person => (this.state.cliente.filter(element => element._id === person.cliente).map(element => element.localidad)))
+    let count = 0
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < array.length; j++) {
+        if (array[i][0] === array[j][0]) {
+          count++
+        }
+      }
+      if(count > biggestCount.count) {
+        biggestCount.count = count
+        biggestCount.id = array[i][0]
+      }
+      count = 0
+      
+    }
+    this.setState({cpBiggest: biggestCount.id})
+  }
+
   ClientHowSold() {
     if(this.state.estadoCliente === false){
       let arrayCliente = []
-      console.log(this.state.clientSold)
       for (let j = 0; j < this.state.person.length; j++){
         if(this.state.person[j].tipo === 'Venta'){
           arrayCliente.push(this.state.person[j].cliente)
@@ -199,6 +244,7 @@ class Table extends React.Component {
         <div className="buttons">
           <button  onClick={this.BiggestEscribano}>Escribano con mas escrituras</button>
           <button  onClick={this.ClientHowSold}>Clientes que vendieron</button>
+          <button  onClick={this.BiggestCp}>Cp donde mas se escrituro</button>
         </div>):null}
       </>
     )

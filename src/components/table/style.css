@@ -9,7 +9,7 @@
   width: 50%;
 }
 
-.lastNameRow, .codigoRow, .nameRow, .tipoRow, .descRow, .clienteRow, .escribanoRow {
+.lastNameRow, .codigoRow, .nameRow, .tipoRow, .descRow, .clienteRow, .escribanoRow, .cpClienteRow {
   border: 1px solid white;
 }
 
@@ -23,7 +23,7 @@
   width: 100%;
 }
 
-#desc, #tipo, #cliente, #escribano {
+#desc, #tipo, #cliente, #escribano , #cpCliente{
   width: 25%;
 }
 
