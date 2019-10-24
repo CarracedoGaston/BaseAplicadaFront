@@ -122,18 +122,19 @@ class Table extends React.Component {
         <div id="cpCliente">
           <div className="title">CP</div>
             {
-              this.state.person.map( person => ((this.state.escribano.filter(element => element._id === person.escribano).map(element => element.localidad)) === this.state.BiggestCp)?
-                (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:'green'}}>
-                   { this.state.localidad
+              this.state.person.map(person => 
+                (this.state.cliente.filter(element => element._id === person.cliente).map(element => element.localidad))[0]===this.state.cpBiggest?
+                  (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:'green'}}>
+                    { this.state.localidad
+                      .filter(cp => cp._id === this.state.cliente.filter(client => client._id === person.cliente).map(client => client.localidad)[0])
+                      .map(cp => cp.name)}                                
+                  </div>) :
+                  (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:''}}>
+                    { this.state.localidad
                     .filter(cp => cp._id === this.state.cliente.filter(client => client._id === person.cliente).map(client => client.localidad)[0])
                     .map(cp => cp.name)}                                
-                </div>) :
-                (<div key = {person._id} className="cpClienteRow" style={{backgroundColor:'blue'}}>
-                  { this.state.localidad
-                   .filter(cp => cp._id === this.state.cliente.filter(client => client._id === person.cliente).map(client => client.localidad)[0])
-                   .map(cp => cp.name)}                                
-               </div>)
-                )
+                </div>)
+                  )
             }
         </div>   
         <div id="escribano">
@@ -213,7 +214,12 @@ class Table extends React.Component {
       count = 0
       
     }
-    this.setState({cpBiggest: biggestCount.id})
+    if(this.state.cpBiggest === ""){
+      this.setState({cpBiggest: biggestCount.id})
+    }
+    else {
+      this.setState({cpBiggest: ""})
+    }
   }
 
   ClientHowSold() {
